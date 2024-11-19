@@ -50,8 +50,10 @@ local function display(userId, booster)
 		overlayFrame.PlayerIcon.ImageRectSize = Vector2.zero
 		if userInputService.TouchEnabled then
 			overlayFrame.PlayerName.TextColor3 = booster and booster.color or Color3.fromRGB(255, 138, 250)
+			overlayFrame.PlayerName.TextTransparency = 0
 		else
 			overlayFrame.PlayerName.PlayerName.TextColor3 = booster and booster.color or Color3.fromRGB(255, 138, 250)
+			overlayFrame.PlayerName.PlayerName.TextTransparency = 0
 		end
 		
 	end
