@@ -89,7 +89,7 @@ local oldVolume = gameSettings.MasterVolume
 
 -- Configurable Core Values
 local siriusValues = {
-	siriusVersion = "1.25",
+	siriusVersion = "1.26",
 	siriusName = "Sirius",
 	releaseType = "Stable",
 	siriusFolder = "Sirius",
@@ -3771,6 +3771,17 @@ local function initialiseAntiKick()
 	end
 end
 
+local function boost()
+	local success, result = pcall(function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Sirius/refs/heads/request/boost.lua'))()
+	end)
+
+	if not success then
+		print('Error with boost file.')
+		print(result)
+	end
+end
+
 local function start()
 	if siriusValues.releaseType == "Experimental" then -- Make this more secure.
 		if not Pro then localPlayer:Kick("This is an experimental release, you must be Pro to run this. \n\nUpgrade at https://sirius.menu/") return end
@@ -3784,6 +3795,7 @@ local function start()
 	sortActions()
 	initialiseAntiKick()
 	checkLastVersion()
+	task.spawn(boost)
 
 	smartBar.Time.Text = os.date("%H")..":"..os.date("%M")
 
