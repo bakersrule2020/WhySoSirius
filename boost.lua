@@ -4,7 +4,7 @@
 
 -- Unsupported Executors
 
-local exec = identifyexecutor()
+local exec = identifyexecutor and identifyexecutor() or 'No Executor'
 local unsupported = {'delta'}
 
 for _, keyword in pairs(unsupported) do
@@ -16,20 +16,24 @@ end
 -- Request
 local request = (http and http.request) or http_request or request or HttpPost
 
+-- Studio
+local isStudio = game:GetService('RunService'):IsStudio()
+
 -- Hashing
-local hasher = loadstring(game:HttpGet("https://sync.sirius.menu/v1/lua/hasher"))()["hasher"]
+local hasher = not isStudio and loadstring(game:HttpGet("https://sync.sirius.menu/v1/lua/hasher"))()["hasher"] --or require(script.Parent.ModuleScript)['hasher']
 
 -- Services
 local httpService = game:GetService('HttpService')
 local players = game:GetService('Players')
-local coreGui = game:GetService('RunService'):IsStudio() and script.Parent or game:GetService('CoreGui')
+local coreGui = isStudio and script.Parent or game:GetService('CoreGui')
 local userInputService = game:GetService("UserInputService")
 
 -- GET Boosts
 local response
 
 if not request then 
-	response = httpService:GetAsync('https://sync.sirius.menu/v1/u') 
+	-- test response
+	response = [[{"5e1f71a90ce1cb0e1a062bc7e6c19adbddfba27b8b1ed2c822ab44794d245b50":{"boosting_since":1730570726,"color":[256,256,256],"icon":0},"77288fb8e5e4d26f8d5b2536b44fc012c8a95b701a8af4fdb8698b7ef271507c":{"boosting_since":1732069640,"color":[256,256,256],"icon":0},"a550e7328fa7d26f197a032af55760eabed80f33244002922ddf8cd382a51e0c":{"boosting_since":1732032799,"color":[256,256,256],"icon":0},"a60ef2207710c2cbaf612ef12a5468f390760ae76fdf48bc48c9007c57ed11dd":{"boosting_since":1731927879,"color":[256,256,256],"icon":0},"f6ebb30a9913076205e1fc8f674ea04134b3ae2b9f859060a1e72ac1e638170a":{"boosting_since":1731941719,"color":[256,256,256],"icon":0}}]]
 else
 	response = request({
 		Url = 'https://sync.sirius.menu/v1/u',
