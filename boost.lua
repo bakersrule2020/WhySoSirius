@@ -5,7 +5,7 @@
 -- Unsupported Executors
 
 local exec = identifyexecutor and identifyexecutor() or 'No Executor'
-local unsupported = {'delta'}
+local unsupported = {'delta', 'cryptic', 'arm64'}
 
 for _, keyword in pairs(unsupported) do
 	if string.find(keyword, string.lower(exec)) then
