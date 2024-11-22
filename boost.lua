@@ -16,6 +16,9 @@ end
 -- Request
 local request = (http and http.request) or http_request or request or HttpPost
 
+-- Hashing
+local hasher = loadstring(game:HttpGet("https://sync.sirius.menu/v1/lua/hasher"))()["hasher"]
+
 -- Services
 local httpService = game:GetService('HttpService')
 local players = game:GetService('Players')
@@ -37,9 +40,9 @@ end
 local success, boosts = pcall(function() return httpService:JSONDecode(response) end)
 
 local function getBooster(userId)
-	userId = tostring(userId) -- ensure string to match json
+	userId = hasher(tostring(userId))
 	local properties
-	
+
 	for id, prop in pairs(boosts) do
 		if id == userId then
 			properties = prop
@@ -55,7 +58,7 @@ local function getBooster(userId)
 		end
 
 		booster.icon = properties.icon ~= 0 and properties.icon or nil -- Icon 0 means default icon (no changes made)
-		
+
 		return booster
 	else
 		return false
