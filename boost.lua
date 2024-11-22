@@ -2,6 +2,17 @@
 -- Sirius Boosts
 -- sirius.menu/privacy | sirius.menu/terms
 
+-- Unsupported Executors
+
+local exec = identifyexecutor()
+local unsupported = {'delta'}
+
+for _, keyword in pairs(unsupported) do
+	if string.find(keyword, string.lower(exec)) then
+		return
+	end
+end
+
 -- Request
 local request = (http and http.request) or http_request or request or HttpPost
 
