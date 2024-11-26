@@ -5,7 +5,7 @@
 > This project will likely not recieve updates.
 
 > [!CAUTION]
-> Plugins are un-moderated and community made. **BE CAUTIOUS OF ANYTHING YOU EXECUTE!**'
+> Plugins are un-moderated and community made. **BE CAUTIOUS OF ANYTHING YOU EXECUTE!**
 
 A simple plugin loader made through filesystem functions.
 To check if your executor supports file functions, run the script below
